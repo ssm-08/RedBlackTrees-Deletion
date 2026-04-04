@@ -22,6 +22,8 @@ void insertion(Node*& r, Node* c, Node* n);
 void deletion(Node*& r, Node* n);
 
 void insertFix(Node*& r, Node* c);
+void deleteFix(Node*&, Node* c);
+
 void leftRotate(Node*& r, Node* x);
 void rightRotate(Node*& r, Node* x);
 
@@ -233,6 +235,116 @@ void insertFix(Node*& r, Node* c) {
   }
 }
 
+void deleteFix(Node*& r, Node* n) {
+
+  // 1. Sibling red
+  
+  // 2. Sibling black
+
+  // 2a. Close nephew red
+  // 2b. Distant nephew red
+  // 2c. Red parent
+  // 2d. All black
+
+  Node* p = n->parent;
+  Node* s;
+  Node* c;
+  Node* d;
+
+  if (p == NULL) { // Root
+    return;
+  }
+  
+  if (p->left == n) { // Left side
+
+    s = p->right;
+    c = s->left;
+    d = s->right;
+
+    if (s->red) { // 1
+
+      leftRotate(r, p);
+      s->red = false;
+      p->red = true;
+
+      deleteFix(r, n);
+      
+    } else { // 2
+      if (c != NULL && c->red) { // 2a
+
+	rightRotate(r, s);
+	c->red = false;
+	s->red = true;
+
+	deleteFix(r, n);
+	
+      } else if (d != NULL && d->red) { // 2b
+
+	leftRotate(r, p);
+	bool temp = s->red;
+	s->red = p->red;
+	p->red = temp;
+	
+      } else if (p->red) { // 2c
+
+	p->red = false;
+	s->red = true;
+	
+      } else { // 2d
+
+	s->red = true;
+
+	deleteFix(r, p);
+	
+      }
+    }
+    
+  } else { // Right side
+
+    s = p->left;
+    c = s->right;
+    d = s->left;
+
+    if (s->red) { // 1
+
+      rightRotate(r, p);
+      s->red = false;
+      p->red = true;
+
+      deleteFix(r, n);
+      
+    } else { // 2
+      if (c != NULL && c->red) { // 2a
+
+	leftRotate(r, s);
+	c->red = false;
+	s->red = true;
+
+	deleteFix(r, n);
+	
+      } else if (d != NULL && d->red) { // 2b
+
+	rightRotate(r, p);
+	bool temp = s->red;
+	s->red = p->red;
+	p->red = temp;
+	
+      } else if (p->red) { // 2c
+
+	p->red = false;
+	s->red = true;
+	
+      } else { // 2d
+
+	s->red = true;
+
+	deleteFix(r, p);
+	
+      }
+    }  
+  }
+}
+
 void print(Node* c, int depth) {
 
   Node* left = c->left;
@@ -330,10 +442,10 @@ void deletion(Node*& r, Node* n) {
     } else if (n->right) {
       successor = n->right;
       n->right->red = false;
-    } else { // Black leaf
-      if (n->red == false) {
+    } else {
+      if (n->red == false) { // Black leaf
 
-	// delete fix
+	deleteFix(r, n);
 	
       }
     }
