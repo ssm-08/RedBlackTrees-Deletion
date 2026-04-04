@@ -40,7 +40,7 @@ int main() {
   const char* INS = "INSERT";
   const char* UPL = "UPLOAD";
   // const char* ROT = "ROTATE";
-  //  const char* DEL = "DELETE";
+  const char* DEL = "DELETE";
   const char* PRINT = "PRINT";
   const char* QUIT = "QUIT";
 
@@ -84,7 +84,15 @@ int main() {
 
 	value = strtok(NULL, " ");
       }
+    } else if (strcmp(input, DEL) == 0) {
 
+      cout << "Enter a number: ";
+      cin >> num;
+      cout << endl;
+
+      if (search(root, num)) {
+	deletion(root, search(root, num));
+      }
       
     } else if (strcmp(input, PRINT) == 0) { // Print tree
       if (root) {
@@ -281,6 +289,7 @@ void deleteFix(Node*& r, Node* n) {
       } else if (d != NULL && d->red) { // 2b
 
 	leftRotate(r, p);
+	d->red = false;
 	bool temp = s->red;
 	s->red = p->red;
 	p->red = temp;
@@ -325,6 +334,7 @@ void deleteFix(Node*& r, Node* n) {
       } else if (d != NULL && d->red) { // 2b
 
 	rightRotate(r, p);
+	d->red = false;
 	bool temp = s->red;
 	s->red = p->red;
 	p->red = temp;
@@ -451,15 +461,17 @@ void deletion(Node*& r, Node* n) {
     }
 
     // Link successor in tree and delete node
-    
-    successor->parent = n->parent;
-    
+
+    if (successor) {
+      successor->parent = n->parent;
+    }
+      
     if (n == r) {
       r = successor;
     } else if (n->parent->left == n) {
       n->parent->left = successor;
     } else if (n->parent->right == n) {
-      n->parent->left = successor;
+      n->parent->right = successor;
     }
 
     delete n;
