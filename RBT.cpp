@@ -36,7 +36,7 @@ int main() {
   char input[99] = "";
   int num = 0;
   
-  // const char* SEARCH = "SEARCH";
+  const char* SEARCH = "SEARCH";
   const char* INS = "INSERT";
   const char* UPL = "UPLOAD";
   // const char* ROT = "ROTATE";
@@ -84,7 +84,7 @@ int main() {
 
 	value = strtok(NULL, " ");
       }
-    } else if (strcmp(input, DEL) == 0) {
+    } else if (strcmp(input, DEL) == 0) { // Delete value
 
       cout << "Enter a number: ";
       cin >> num;
@@ -92,6 +92,18 @@ int main() {
 
       if (search(root, num)) {
 	deletion(root, search(root, num));
+      }
+      
+    } else if (strcmp(input, SEARCH) == 0) { // Search value
+
+      cout << "Enter a number: ";
+      cin >> num;
+      cout << endl;
+
+      if (search(root, num)) {
+	cout << "In tree" << endl;
+      } else {
+	cout << "Not in tree" << endl;
       }
       
     } else if (strcmp(input, PRINT) == 0) { // Print tree
