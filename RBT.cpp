@@ -45,6 +45,9 @@ int main() {
   const char* PRINT = "PRINT";
   const char* QUIT = "QUIT";
 
+  cout << "COMMANDS:" << endl;
+  cout << "\nSEARCH\nINSERT\nUPLOAD\nDELETE\nPRINT\nQUIT\n" << endl;
+  
   // Command loop
   while (run == true) {
 
