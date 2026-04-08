@@ -16,6 +16,7 @@ struct Node {
   
 };
 
+// Program functions
 void print(Node* c, int depth);
 Node* search(Node* c, int n);
 void insertion(Node*& r, Node* c, Node* n);
@@ -184,6 +185,7 @@ void rightRotate(Node*& r, Node* x) {
   cout << "right end" << endl;
 }
 
+// Fix RBT properties recursively
 void insertFix(Node*& r, Node* c) {
 
   Node* p = c->parent;
@@ -255,6 +257,7 @@ void insertFix(Node*& r, Node* c) {
   }
 }
 
+// Fix RBT properties for Black Leaf recursively
 void deleteFix(Node*& r, Node* n) {
 
   // 1. Sibling red
@@ -367,6 +370,7 @@ void deleteFix(Node*& r, Node* n) {
   }
 }
 
+// Print RBT recursively
 void print(Node* c, int depth) {
 
   Node* left = c->left;
@@ -393,6 +397,7 @@ void print(Node* c, int depth) {
   }
 }
 
+// Search RBT recursively
 Node* search(Node* c, int n) {
 
   // End or no node
@@ -410,6 +415,7 @@ Node* search(Node* c, int n) {
   }
 }
 
+// Search through RBT and add node recursively and fix RBT
 void insertion(Node*& r, Node* c, Node* n) {
 
   if (r == NULL) {
@@ -436,6 +442,7 @@ void insertion(Node*& r, Node* c, Node* n) {
   }
 }
 
+// Delete given node and fix RBT
 void deletion(Node*& r, Node* n) {
 
   Node* successor = NULL;
