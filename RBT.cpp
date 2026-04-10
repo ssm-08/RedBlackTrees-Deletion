@@ -1,3 +1,15 @@
+/*
+References used for RBT:
+
+Rotations: https://www.programiz.com/dsa/red-black-tree
+Insertion fix: https://www.programiz.com/dsa/red-black-tree
+Deletion and fix: https://en.wikipedia.org/wiki/Red%E2%80%93black_tree
+
+Playlist below was reference to understand RBT concepts:
+https://www.youtube.com/watch?v=qvZGUFHWChY&list=PL9xmBV_5YoZNqDI8qfOZgzbqahCUmUEin
+*/
+
+
 #include <iostream>
 #include <cstring>
 #include <fstream>
